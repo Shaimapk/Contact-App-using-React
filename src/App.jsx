@@ -6,7 +6,7 @@ import ContactList from './components/ContactList'
 function App() {
   const LOCAL_STORAGE_KEY='contactApp-contacts';
   const [contacts,setContacts]=useState(()=>{
-    return JSON.parse(localStorage.getItem('contacts'))||[];
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))||[];
   });
 
   useEffect(()=>{

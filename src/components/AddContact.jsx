@@ -6,18 +6,23 @@ export default function AddContact({addContactHandler}) {
         name:'',
         email:''
     });
+    const [errors,setErrors]=useState('');
     
     const add =(e)=>{
         e.preventDefault();
 
-        if(state.name === "" || state.email === ""){
-            alert('All fields are mandatory!');
+        if(state.name.trim() === "" || state.email.trim() === ""){
+            setErrors('All fields required!');
+            return;
+        }else if(!/\S+@\S+\.\S+/.test(state.email)){
+            setErrors('Invalid email id');
             return;
         }
         addContactHandler(state);
         console.log("state: "+state);
         
         setState({name:'',email:''});
+        setErrors('');
         
     }
 
@@ -35,7 +40,8 @@ export default function AddContact({addContactHandler}) {
                         id="name"
                         placeholder="Name"
                         value={state.name}
-                        onChange={(e) => setState({...state, name: e.target.value })}
+                        onChange={(e) => { setState({...state, name: e.target.value });
+                                            setErrors('')}}
                         className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
@@ -49,10 +55,12 @@ export default function AddContact({addContactHandler}) {
                         id="email"
                         placeholder="Email"
                         value={state.email}
-                        onChange={(e) => setState({...state, email: e.target.value })}
+                        onChange={(e) => {setState({...state, email: e.target.value });
+                                            setErrors('');}}
                         className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
+                {errors && <div className="text-red-500 text-sm">{errors}</div>}
                 <button type="submit" className="w-3/4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
                     Add
                 </button>
