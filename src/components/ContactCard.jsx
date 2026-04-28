@@ -1,5 +1,4 @@
 import { TrashIcon } from '@heroicons/react/16/solid'
-import React from 'react'
 import user from '../images/pp1.jpg'
 
 export default function ContactCard(props) {

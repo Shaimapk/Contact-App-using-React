@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import AddContact from './components/AddContact'
 import ContactList from './components/ContactList'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const LOCAL_STORAGE_KEY='contactApp-contacts';
@@ -25,9 +26,17 @@ function App() {
 
   return (
     <div className='mx-4 space-y-4'>
+      <BrowserRouter>
       <Header />
-      <AddContact addContactHandler={addContactHandler} />
-      <ContactList contacts={contacts} getContactId={removeContactHandler} />
+
+      <Routes>
+      <Route path='/add' element={ <AddContact addContactHandler={addContactHandler} />} />
+      <Route path='/' element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
+      {/* <AddContact addContactHandler={addContactHandler} />
+      <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
+      </Routes>
+
+    </BrowserRouter>
     </div>
   )
 }

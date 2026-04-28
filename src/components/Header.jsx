@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Header() {
   return (
     <div className='fixed top-0 left-0 w-full border-b border-gray-300 shadow-sm'>

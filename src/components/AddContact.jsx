@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddContact({addContactHandler}) {
+
 
     const [state,setState]=useState({
         name:'',
         email:''
     });
     const [errors,setErrors]=useState('');
+
+    const navigate=useNavigate();
     
     const add =(e)=>{
         e.preventDefault();
@@ -23,6 +27,8 @@ export default function AddContact({addContactHandler}) {
         
         setState({name:'',email:''});
         setErrors('');
+
+        navigate('/');
         
     }
 
@@ -61,7 +67,7 @@ export default function AddContact({addContactHandler}) {
                     />
                 </div>
                 {errors && <div className="text-red-500 text-sm">{errors}</div>}
-                <button type="submit" className="w-3/4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                <button type="submit" className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
                     Add
                 </button>
             </form>
