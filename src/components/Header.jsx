@@ -4,7 +4,6 @@ export default function Header() {
         <div className='mx-auto text-center py-4'>
             <h1 className='text-2xl font-semibold'>Contact Manager</h1>
         </div>
-
     </div>
   )
 }
