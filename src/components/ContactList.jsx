@@ -1,10 +1,27 @@
+import { useState } from 'react';
 import ContactCard from './ContactCard'
 import { Link } from 'react-router-dom';
+import DeleteConfirmModel from './DeleteConfirmModel';
 
 export default function ContactList({contacts,getContactId}) {
 
+    const [seletedId,setSelectedId]=useState(false);
+    const [showConfirmModel,setShowConfirmModel]=useState(false);
+
+
     const deleteContactHandler=(id)=>{
-        getContactId(id);
+        setSelectedId(id);
+        setShowConfirmModel(true);
+    }
+    const confirmDeleteHandler =()=>{
+        getContactId(seletedId);
+        setSelectedId(null);
+        setShowConfirmModel(false);
+
+    }
+    const cancelDeleteHandler =()=>{
+        setShowConfirmModel(false);
+        setSelectedId(null);
     }
 
     const renderContactList=contacts.map((contact)=>{
@@ -23,6 +40,7 @@ export default function ContactList({contacts,getContactId}) {
             </Link>
         </div>
         {renderContactList}
+        {showConfirmModel && <DeleteConfirmModel onConfirm={confirmDeleteHandler} onCancel={cancelDeleteHandler} />}
     </div>
   )
 }
