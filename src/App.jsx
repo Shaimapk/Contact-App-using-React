@@ -4,19 +4,36 @@ import AddContact from './components/AddContact'
 import ContactList from './components/ContactList'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ContactDetails from './components/contactDetails';
+import api from './api/contacts'
 
 function App() {
   const LOCAL_STORAGE_KEY='contactApp-contacts';
-  const [contacts,setContacts]=useState(()=>{
-    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))||[];
-  });
+  // const [contacts,setContacts]=useState(()=>{
+  //  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))||[];
+  // });
+  const [contacts,setContacts]=useState([]);
+
+  //retrieve contacts
+  const retrieveContacts=async ()=>{
+    const response =await api.get("/contacts");
+    return response.data;
+  };
+
+  useEffect(()=>{
+    const getAllContacts=async ()=>{
+      const allContacts =await retrieveContacts();
+      if(allContacts) setContacts(allContacts);
+    };
+    getAllContacts();
+  },[]);
 
   useEffect(()=>{
     localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(contacts))
   },[contacts]);
 
   const addContactHandler =(contact)=>{
-    console.log("reached apps, contact"+contact);
+    console.log(contact);
+    
     setContacts([...contacts,{id:crypto.randomUUID(),...contact}])
   }
 
