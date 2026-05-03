@@ -26,7 +26,6 @@ function App() {
 
 
   const addContactHandler =async (contact)=>{
-    console.log(contact);
     const request = {
       id:crypto.randomUUID(),...contact
     }
@@ -34,7 +33,8 @@ function App() {
     setContacts([...contacts,response.data]);
   }
 
-  const removeContactHandler=(id)=>{
+  const removeContactHandler=async (id)=>{
+    await api.delete(`/contacts/${id}`);
     const newContactList=contacts.filter((contact)=>(contact.id !== id));
     setContacts(newContactList);
   }
