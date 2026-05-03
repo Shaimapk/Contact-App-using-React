@@ -7,10 +7,7 @@ import ContactDetails from './components/contactDetails';
 import api from './api/contacts'
 
 function App() {
-  const LOCAL_STORAGE_KEY='contactApp-contacts';
-  // const [contacts,setContacts]=useState(()=>{
-  //  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))||[];
-  // });
+
   const [contacts,setContacts]=useState([]);
 
   //retrieve contacts
@@ -27,14 +24,14 @@ function App() {
     getAllContacts();
   },[]);
 
-  useEffect(()=>{
-    localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(contacts))
-  },[contacts]);
 
-  const addContactHandler =(contact)=>{
+  const addContactHandler =async (contact)=>{
     console.log(contact);
-    
-    setContacts([...contacts,{id:crypto.randomUUID(),...contact}])
+    const request = {
+      id:crypto.randomUUID(),...contact
+    }
+    const response =await api.post("/contacts",request);
+    setContacts([...contacts,response.data]);
   }
 
   const removeContactHandler=(id)=>{
