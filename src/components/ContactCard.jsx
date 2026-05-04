@@ -1,4 +1,4 @@
-import { TrashIcon } from '@heroicons/react/16/solid'
+import { TrashIcon, PencilSquareIcon } from '@heroicons/react/16/solid'
 import user from '../images/pp1.jpg'
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,12 @@ export default function ContactCard(props) {
                 </div>
             </div>
         </Link>
-        <TrashIcon onClick={()=>props.clickHandler(id)} className='w-5 h-5 text-red-500 hover:text-red-700 cursor-pointer' />
+        <div className='flex justify-center gap-5'>
+            <Link to={`/edit/${contact.id}`} state={contact}>
+                <PencilSquareIcon className='w-5 h-5 text-blue-500 hover:text-blue-700 cursor-pointer' />
+            </Link>
+            <TrashIcon onClick={()=>props.clickHandler(id)} className='w-5 h-5 text-red-500 hover:text-red-700 cursor-pointer' />
+        </div>
     </div>
   )
 }

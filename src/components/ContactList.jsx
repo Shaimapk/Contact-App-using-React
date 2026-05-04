@@ -5,9 +5,8 @@ import DeleteConfirmModel from './DeleteConfirmModel';
 
 export default function ContactList({contacts,getContactId}) {
 
-    const [seletedId,setSelectedId]=useState(false);
+    const [seletedId,setSelectedId]=useState(null);
     const [showConfirmModel,setShowConfirmModel]=useState(false);
-
 
     const deleteContactHandler=(id)=>{
         setSelectedId(id);
@@ -40,7 +39,9 @@ export default function ContactList({contacts,getContactId}) {
             </Link>
         </div>
         {renderContactList}
-        {showConfirmModel && <DeleteConfirmModel onConfirm={confirmDeleteHandler} onCancel={cancelDeleteHandler} />}
+        {showConfirmModel && 
+            <DeleteConfirmModel onConfirm={confirmDeleteHandler} onCancel={cancelDeleteHandler} />
+        }
     </div>
   )
 }

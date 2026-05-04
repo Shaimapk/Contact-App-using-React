@@ -5,6 +5,7 @@ import ContactList from './components/ContactList'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ContactDetails from './components/contactDetails';
 import api from './api/contacts'
+import EditContact from './components/EditContact';
 
 function App() {
 
@@ -33,6 +34,16 @@ function App() {
     setContacts([...contacts,response.data]);
   }
 
+  const updateContactHandler =async (contact)=>{
+    const response =await api.put(`/contacts/${contact.id}`,contact);
+    const {id}=response.data;
+    setContacts((prevContacts)=>{
+      return prevContacts.map((c)=>{
+        return c.id===id?{...response.data}:c
+      })
+    })
+  }
+
   const removeContactHandler=async (id)=>{
     await api.delete(`/contacts/${id}`);
     const newContactList=contacts.filter((contact)=>(contact.id !== id));
@@ -48,6 +59,7 @@ function App() {
         <Route path='/add' element={ <AddContact addContactHandler={addContactHandler} />} />
         <Route path='/' element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
         <Route path='/contact/:id' element={<ContactDetails contacts={contacts} />} />
+        <Route path='/edit/:id' element={<EditContact updateContactHandler={updateContactHandler} />} />
       </Routes>
 
     </BrowserRouter>
