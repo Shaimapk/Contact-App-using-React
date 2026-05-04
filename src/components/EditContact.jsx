@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function EditContact({updateContactHandler,contacts}) {
 
@@ -47,7 +47,7 @@ export default function EditContact({updateContactHandler,contacts}) {
     return (
         <div className="mt-24 mx-auto">
             <h2 className="text-xl font-semibold mb-6 text-center">Update Contact</h2>
-            <form onSubmit={update} className="space-y-4">
+            <form onSubmit={update} className="space-y-4 w-3/4 m-5">
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1">
                         Name
@@ -60,7 +60,7 @@ export default function EditContact({updateContactHandler,contacts}) {
                         value={state.name}
                         onChange={(e) => { setState({...state, name: e.target.value });
                                             setErrors('')}}
-                        className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
                 <div>
@@ -75,13 +75,20 @@ export default function EditContact({updateContactHandler,contacts}) {
                         value={state.email}
                         onChange={(e) => {setState({...state, email: e.target.value });
                                             setErrors('');}}
-                        className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
                 {errors && <div className="text-red-500 text-sm">{errors}</div>}
-                <button type="submit" className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
-                    Update
-                </button>
+                <div className="flex justify-between">
+                    <button type="submit" className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                        Update
+                    </button>
+                      <Link to={'/'}>
+                        <button className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                            Back
+                        </button>
+                    </Link>
+                </div>
             </form>
         </div>
     );

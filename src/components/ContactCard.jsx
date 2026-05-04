@@ -8,9 +8,9 @@ export default function ContactCard(props) {
 
   return (
     
-     <div key={id} className='flex justify-between items-center w-full border-b-gray-800 shadow-md p-5'>
+     <div key={id} className='flex justify-between items-center w-full border-b-gray-800 shadow-md p-2'>
         <Link to={`/contact/${id}`} state={contact}>
-            <div className='p-4 w-full flex items-center'>
+            <div className='w-full flex items-center'>
                 <img src={user} alt="user" className='w-15 h-15 rounded-full' />
                 <div className='p-4'>
                     <div className='font-semibold'>{name}</div>
@@ -18,7 +18,7 @@ export default function ContactCard(props) {
                 </div>
             </div>
         </Link>
-        <div className='flex justify-center gap-5'>
+        <div className=' m-5 flex justify-center gap-5'>
             <Link to={`/edit/${contact.id}`} state={contact}>
                 <PencilSquareIcon className='w-5 h-5 text-blue-500 hover:text-blue-700 cursor-pointer' />
             </Link>

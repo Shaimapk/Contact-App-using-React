@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AddContact({addContactHandler,contacts}) {
 
@@ -43,7 +43,7 @@ export default function AddContact({addContactHandler,contacts}) {
     return (
         <div className="mt-24 mx-auto">
             <h2 className="text-xl font-semibold mb-6 text-center">Add Contact</h2>
-            <form onSubmit={add} className="space-y-4">
+            <form onSubmit={add} className="space-y-4 w-3/4 m-5">
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1">
                         Name
@@ -56,7 +56,7 @@ export default function AddContact({addContactHandler,contacts}) {
                         value={state.name}
                         onChange={(e) => { setState({...state, name: e.target.value });
                                             setErrors('')}}
-                        className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
                 <div>
@@ -71,13 +71,20 @@ export default function AddContact({addContactHandler,contacts}) {
                         value={state.email}
                         onChange={(e) => {setState({...state, email: e.target.value });
                                             setErrors('');}}
-                        className="w-3/4 px-3 py-2 border border-gray-300 rounded-md"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     />
                 </div>
                 {errors && <div className="text-red-500 text-sm">{errors}</div>}
-                <button type="submit" className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
-                    Add
-                </button>
+                <div className="flex justify-between">
+                    <button type="submit" className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                        Add
+                    </button>
+                    <Link to={'/'}>
+                        <button className="p-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                            Back
+                        </button>
+                    </Link>
+                </div>          
             </form>
         </div>
     );
