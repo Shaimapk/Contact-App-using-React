@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function EditContact({updateContactHandler}) {
+export default function EditContact({updateContactHandler,contacts}) {
 
     const navigate=useNavigate();
     const location=useLocation();
@@ -28,6 +28,14 @@ export default function EditContact({updateContactHandler}) {
             setErrors('Invalid email id');
             return;
         }
+                //check duplicate email
+        const isDuplicate=contacts.some((c)=> 
+            c.email.toLowerCase()===state.email.trim().toLowerCase() && c.id !== contact.id)
+        if(isDuplicate){
+            setErrors('Email already exists!');
+            return;
+        }
+
         updateContactHandler({...state,id:contact.id});
         
         setErrors('');

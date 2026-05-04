@@ -55,10 +55,10 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path="/add" element={<AddContact addContactHandler={addContactHandler} />} />
+                    <Route path="/add" element={<AddContact addContactHandler={addContactHandler} contacts={contacts} />} />
                     <Route path="/" element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
                     <Route path="/contact/:id" element={<ContactDetails contacts={contacts} />} />
-                    <Route path="/edit/:id" element={<EditContact updateContactHandler={updateContactHandler} />} />
+                    <Route path="/edit/:id" element={<EditContact updateContactHandler={updateContactHandler} contacts={contacts}/> } />
                 </Routes>
             </BrowserRouter>
         </div>
