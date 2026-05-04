@@ -1,4 +1,4 @@
-import { TrashIcon, PencilSquareIcon } from '@heroicons/react/16/solid'
+import { TrashIcon, PencilSquareIcon} from '@heroicons/react/16/solid'
 import user from '../images/pp1.jpg'
 import { Link } from 'react-router-dom';
 
